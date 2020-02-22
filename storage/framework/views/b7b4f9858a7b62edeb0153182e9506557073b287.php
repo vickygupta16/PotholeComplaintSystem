@@ -1,0 +1,61 @@
+<head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+
+<nav class="navbar navbar-expand-md" style="background-color: rgba(0,0,0,0.4); width:80%; border-radius: 30px">
+    <div class="container">
+        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+            <?php echo e(('Pothole Complaint System')); ?>
+
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="<?php echo e(__('Toggle navigation')); ?>">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto">
+                <li><a class="nav-item nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a class="nav-item nav-link" href="/about"><i class="fas fa-info"></i> About</a></li>
+                <li><a class="nav-item nav-link" href="/services"><i class="fas fa-tasks"></i> Services</a></li>
+            </ul>
+
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Authentication Links -->
+                <?php if(auth()->guard()->guest()): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
+                    </li>
+                    <li class="nav-item">
+                        <?php if(Route::has('register')): ?>
+                            <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
+                        <?php endif; ?>
+                    </li>
+                <?php else: ?>
+                <li class="nav-item"><a class="nav-link" href="/home">Dashboard</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/view">View All Complaints</a><li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <?php echo e(Auth::user()->name); ?> <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();">
+                                <?php echo e(__('Logout')); ?>
+
+                            </a>
+
+                            <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+                                <?php echo csrf_field(); ?>
+                            </form>
+                        </div>
+                    </li>
+                <?php endif; ?>
+            </ul>
+
+        </div>
+    </div>
+</nav>
